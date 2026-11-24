@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>翻译日志 | 墨韵漫画</title>
+<style>
+:root{
+  --red:#a8343a; --red-deep:#7a2228; --red-soft:#e9c9c3;
+  --paper:#faf3e6; --paper-dk:#f0e3c8; --ink:#2b1d1b; --gold:#c4a25a; --brown:#5a2e24;
+  --shadow:rgba(43,29,27,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun","Hiragino Mincho ProN","Yu Mincho",serif;background:var(--paper);color:var(--ink);line-height:1.8}
+a{text-decoration:none;color:inherit}
+
+/* header */
+header{background:var(--red-deep);border-bottom:4px solid var(--gold);position:sticky;top:0;z-index:50}
+.header-in{max-width:1060px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.logo{display:flex;align-items:center;gap:12px;color:#fbefe0}
+.seal{width:40px;height:40px;background:var(--red);border:2px solid #fbefe0;border-radius:4px;display:grid;place-items:center;font-size:22px;font-weight:700}
+.logo b{font-size:1.3rem;letter-spacing:.2em}
+nav{display:flex;flex-wrap:wrap;gap:4px}
+nav a{color:#f3dfd0;padding:6px 14px;border-radius:3px;font-size:.95rem;letter-spacing:.1em}
+nav a:hover,nav a.on{background:var(--red);color:#fff}
+
+/* page title */
+.page-title{background:var(--red);color:#fbefe0;text-align:center;padding:40px 20px 34px}
+.page-title h1{font-size:2rem;letter-spacing:.3em;padding-left:.3em}
+.page-title p{margin-top:8px;letter-spacing:.1em;font-size:.95rem;opacity:.9}
+
+/* layout */
+.layout{max-width:1060px;margin:40px auto 60px;padding:0 20px;display:flex;gap:28px;align-items:flex-start}
+.main-col{flex:3;min-width:0}
+.side-col{flex:1;min-width:200px}
+.back{display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-bottom:22px}
+.back:hover{text-decoration:underline}
+
+/* sidebar */
+.side-block{background:#fff;border:2px solid var(--paper-dk);box-shadow:4px 4px 0 var(--paper-dk);padding:20px;position:sticky;top:96px}
+.side-block h3{font-size:.95rem;letter-spacing:.15em;color:var(--red);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--paper-dk)}
+.side-link{display:flex;align-items:center;gap:8px;color:var(--brown);font-weight:600;font-size:.9rem;padding:10px 6px;border-bottom:1px dashed var(--paper-dk);transition:background .2s,padding-left .2s}
+.side-link:last-child{border-bottom:none}
+.side-link::before{content:"▶";font-size:.65rem;color:var(--red)}
+.side-link:hover{background:var(--paper-dk);color:var(--red);padding-left:12px}
+
+/* note card */
+.note{background:#fff;border:2px solid var(--paper-dk);box-shadow:5px 5px 0 var(--paper-dk);margin-bottom:30px;overflow:hidden}
+.note-head{background:var(--brown);color:#fbefe0;padding:16px 22px;display:flex;gap:14px;align-items:flex-start}
+.num{background:var(--gold);color:var(--brown);font-weight:700;font-size:.85rem;border-radius:50%;width:32px;height:32px;flex-shrink:0;display:grid;place-items:center}
+.jp{font-size:1.1rem;line-height:1.6}
+.jp small{display:block;font-size:.75rem;opacity:.65;margin-top:2px;letter-spacing:.1em}
+.zh{background:var(--red);color:#fff;padding:14px 22px;font-size:1.1rem;border-top:2px solid var(--red-deep);border-bottom:2px solid var(--red-deep);letter-spacing:.05em}
+.zh small{display:block;font-size:.8rem;opacity:.8;letter-spacing:.08em;margin-top:2px}
+.toggle{width:100%;text-align:left;background:none;border:none;border-top:1px solid var(--paper-dk);padding:11px 22px;font:inherit;font-size:.85rem;font-weight:700;color:var(--brown);cursor:pointer;display:flex;justify-content:space-between}
+.toggle:hover{background:var(--paper-dk)}
+.body{display:none;padding:20px 22px}
+.body.open{display:block}
+.body-title{font-size:.85rem;letter-spacing:.15em;color:var(--red);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--paper-dk)}
+.row{display:grid;grid-template-columns:170px 1fr;gap:4px 18px;padding:12px 0;border-top:1px dashed var(--paper-dk)}
+.row:first-of-type{border-top:none;padding-top:0}
+.w{font-weight:700;color:var(--red);line-height:1.5}
+.w small{display:block;font-weight:400;color:#8a6a62;font-size:.8rem}
+.d{font-size:.92rem}
+.d .ref{font-size:.83rem;opacity:.7}
+.tag{display:inline-block;background:var(--paper-dk);color:var(--brown);font-size:.72rem;font-weight:700;padding:1px 8px;margin-left:4px;border-radius:2px;vertical-align:middle}
+
+footer{background:var(--red-deep);color:#e8cfc2;text-align:center;padding:24px 20px;font-size:.85rem;letter-spacing:.1em;border-top:4px solid var(--gold)}
+
+@media(max-width:760px){
+  .layout{flex-direction:column}
+  .side-col{width:100%}
+  .side-block{position:static}
+  .row{grid-template-columns:1fr}
+  header{position:static}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="logo" href="index.html"><span class="seal">漫</span><b>墨韵漫画</b></a>
+    <nav>
+      <a href="index.html">首页</a>
+      <a class="on" href="translation.html">翻译日志</a>
+      <a href="blog.html">博客</a>
+      <a href="gallery.html">画廊</a>
+      <a href="about.html">关于</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-title">
+  <h1>翻译日志</h1>
+  <p>日语原文 → 中文翻译 + 词汇与语法解析</p>
+</div>
+
+<div class="layout">
+  <div class="main-col">
+    <a class="back" href="index.html">← 回到首页</a>
+
+    <!-- NOTE ★ -->
+    <div class="note">
+      <div class="note-head">
+        <div class="num">★</div>
+        <div class="jp">「私の人生は、その瞬間から始まったような気がする。」<small>小説翻訳 / 小说翻译</small></div>
+      </div>
+      <div class="zh">「我觉得，我的人生似乎从那一刻才真正开始。」<small>wǒ juéde, wǒ de rénshēng sìhū cóng nà yí kè cái zhēnzhèng kāishǐ</small></div>
+      <button class="toggle" onclick="tg(this)"><span>🔍 词汇与语法解析</span><span>▲</span></button>
+      <div class="body open">
+        <div class="body-title">词汇解析</div>
+        <div class="row"><div class="w">我觉得<small>wǒ juéde</small></div><div class="d">「私は〜と思う」。「気がする」に近い柔らかい言い方。<br><span class="ref">「我认为」だとより断定的で硬い。</span></div></div>
+        <div class="row"><div class="w">我的人生<small>wǒ de rénshēng</small></div><div class="d">「私の人生」。<em>的</em> は「の」にあたる助詞。</div></div>
+        <div class="row"><div class="w">似乎<small>sìhū</small></div><div class="d">「〜のようだ」。原文の「〜ような」のニュアンスを担う副詞。</div></div>
+        <div class="row"><div class="w">从那一刻<small>cóng nà yí kè</small></div><div class="d"><em>从</em> = 〜から ／ <em>那</em> = あの ／ <em>一刻</em> = 一瞬。「その瞬間から」。</div></div>
+        <div class="row"><div class="w">才<small>cái</small></div><div class="d">「やっと・そこで初めて」。「その瞬間から<em>やっと</em>始まった」という遅さ・重みを出す副詞。<span class="tag">副词</span><br><span class="ref">日本語の原文にはない語だが、ニュアンスを補うために加えた。</span></div></div>
+        <div class="row"><div class="w">真正开始<small>zhēnzhèng kāishǐ</small></div><div class="d"><em>真正</em> = 本当に ／ <em>开始</em> = 始まる。「本当に始まった」で人生の転換点を強調した。</div></div>
+      </div>
+    </div>
+
+    <!-- NOTE 1 -->
+    <div class="note">
+      <div class="note-head">
+        <div class="num">1</div>
+        <div class="jp">「よし！河童を捕まえて一攫千金目指すぞ！」<small>日语原文 / 日本語の台詞</small></div>
+      </div>
+      <div class="zh">「好！抓住河童，一夜暴富！」<small>hǎo! zhuāzhù hétóng, yí yè bàofù!</small></div>
+      <button class="toggle" onclick="tg(this)"><span>🔍 词汇与语法解析</span><span>▲</span></button>
+      <div class="body open">
+        <div class="body-title">词汇解析</div>
+        <div class="row"><div class="w">好！<small>hǎo</small></div><div class="d">「よし！」に相当する掛け声。「よっしゃ」のノリなら <em>太好了！</em> も可。</div></div>
+        <div class="row"><div class="w">抓住<small>zhuāzhù</small></div><div class="d">「捕まえる」。<em>抓</em>（つかむ）＋ <em>住</em>（しっかり固定される）。<span class="tag">结果补语</span><br><span class="ref">「捕まえて逃がさない」という結果までが含まれる。</span></div></div>
+        <div class="row"><div class="w">河童<small>hétóng</small></div><div class="d">日本の妖怪。中国語でも <em>河童</em> と書き、そのまま通じる。<br><span class="ref">必要なら「日本传说中的水怪」と注を付ける。</span></div></div>
+        <div class="row"><div class="w">一夜暴富<small>yí yè bàofù</small></div><div class="d">「一攫千金」にあたる四字表現。<em>一夜</em> = 一晩で ／ <em>暴富</em> = 急に大金持ちになる。<span class="tag">成语风</span><br><span class="ref">近い成語に <em>一本万利</em>（元手が少なく大儲け）もある。</span></div></div>
+      </div>
+    </div>
+
+    <!-- NOTE 2 -->
+    <div class="note">
+      <div class="note-head">
+        <div class="num">2</div>
+        <div class="jp">「借金作ってなにしてるの？」<small>日语原文 / 日本語の台詞</small></div>
+      </div>
+      <div class="zh">「你欠了一屁股债，到底在干什么？」<small>nǐ qiàn le yì pìgu zhài, dàodǐ zài gàn shénme?</small></div>
+      <button class="toggle" onclick="tg(this)"><span>🔍 词汇与语法解析</span><span>▲</span></button>
+      <div class="body open">
+        <div class="body-title">词汇解析</div>
+        <div class="row"><div class="w">你<small>nǐ</small></div><div class="d">「あなた」。中国語は日本語ほど主語を省かないので、会話でも入れるのが自然。</div></div>
+        <div class="row"><div class="w">欠了<small>qiàn le</small></div><div class="d"><em>欠</em> = 借りがある ／ <em>了</em> = 完了を表す助詞。「借りてしまった」。<span class="tag">动态助词 了</span></div></div>
+        <div class="row"><div class="w">一屁股债<small>yì pìgu zhài</small></div><div class="d">口語の慣用表現で「借金まみれ」。直訳は「お尻いっぱいの借金」。<span class="tag">口语</span><br><span class="ref">硬い文章なら <em>欠了很多债</em> でもよい。</span></div></div>
+        <div class="row"><div class="w">到底<small>dàodǐ</small></div><div class="d">「いったい」。疑問文に苛立ちや問い詰めるニュアンスを加える副詞。</div></div>
+        <div class="row"><div class="w">在干什么<small>zài gàn shénme</small></div><div class="d"><em>在</em> + 動詞 = 〜している（進行）<span class="tag">进行态</span><br><em>干什么</em> = 何をする（口語）。<span class="ref">書き言葉では <em>做什么</em> も使う。</span></div></div>
+      </div>
+    </div>
+
+    <!-- NOTE 3 -->
+    <div class="note">
+      <div class="note-head">
+        <div class="num">3</div>
+        <div class="jp">「あんたなんか人間じゃない」<small>日语原文 / 日本語の台詞</small></div>
+      </div>
+      <div class="zh">「你根本不是人。」<small>nǐ gēnběn bú shì rén.</small></div>
+      <button class="toggle" onclick="tg(this)"><span>🔍 词汇与语法解析</span><span>▲</span></button>
+      <div class="body open">
+        <div class="body-title">词汇解析</div>
+        <div class="row"><div class="w">你<small>nǐ</small></div><div class="d">「あんた」の乱暴さは、ここでは <em>你</em> と語気で出す。必要なら <em>你这家伙</em> で一段きつくできる。</div></div>
+        <div class="row"><div class="w">根本<small>gēnběn</small></div><div class="d">「そもそも・まったく」。否定と組み合わせて強く否定する副詞。<span class="tag">副词</span></div></div>
+        <div class="row"><div class="w">不是<small>bú shì</small></div><div class="d">「〜ではない」。<em>是</em> の否定形。<span class="ref">声調変化で <em>bú</em>（第4声の前では不が第2声になる）。</span></div></div>
+        <div class="row"><div class="w">人<small>rén</small></div><div class="d">「人間」。口語では <em>人类</em> より <em>人</em> の一文字のほうが自然で、台詞に力が出る。</div></div>
+      </div>
+    </div>
+
+    <!-- 追加ノートはここにコピペで増やす -->
+  </div>
+
+  <aside class="side-col">
+    <div class="side-block">
+      <h3>📂 メニュー</h3>
+      <a class="side-link" href="grammar.html">文法ノート</a>
+      <a class="side-link" href="novel.html">小説翻訳</a>
+      <a class="side-link" href="studyblog.html">勉強のひとことブログ</a>
+      <a class="side-link" href="dictionary.html">辞書</a>
+    </div>
+  </aside>
+</div>
+
+<footer>© 2026 Azalea Creative Room ｜ 墨韵漫画</footer>
+
+<script>
+function tg(btn){
+  var b=btn.nextElementSibling;
+  b.classList.toggle('open');
+  btn.lastElementChild.textContent=b.classList.contains('open')?'▲':'▼';
+}
+</script>
+</body>
+</html>
